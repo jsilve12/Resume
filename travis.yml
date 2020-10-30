@@ -8,3 +8,6 @@ jobs:
     - stage: build-website
       script:
         - ./docker
+    - stage: deploy-website
+      script:
+        - echo 'yay'
