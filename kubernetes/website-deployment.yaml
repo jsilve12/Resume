@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website
+  namespace: resume
+  labels:
+    app: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website
+      tier: deploy
+  template:
+    metadata:
+      labels:
+        app: website
+        tier: deploy
+    spec:
+      containers:
+        - name: website
+          image: gcr.io/personal-project-289714/resume:20201030010011
+          ports:
+          - containerPort: 8000
