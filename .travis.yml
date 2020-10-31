@@ -9,6 +9,8 @@ before_install:
   -in gcp-secret.json.enc -out gcp-secret.json -d
 - mv gcp-secret.json ${HOME}/gcloud-service-key.json
 - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+- source $HOME/google-cloud-sdk/path.bash.inc
+- gcloud compnents update kubectl
 jobs:
   include:
   - stage: build-website
