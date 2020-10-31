@@ -7,16 +7,16 @@ env:
 before_install:
 - openssl aes-256-cbc -K $encrypted_3dc22455e252_key -iv $encrypted_3dc22455e252_iv
   -in gcp-secret.json.enc -out gcp-secret.json -d
+- if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com | bash; fi
 - mv gcp-secret.json ${HOME}/gcloud-service-key.json
 - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-- PATH=$PATH:/usr/bin/gcloud
 - gcloud auth configure-docker --quiet
 jobs:
   include:
   - stage: build-website
     script:
     - docker build . -t gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
-    - docker push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
+    - gcloud docker push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
   - stage: deploy-website
     script:
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
