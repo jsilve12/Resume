@@ -10,6 +10,7 @@ env:
 
 before_install:
   - echo $GCLOUD_SERVICE_KEY_STG | base64 --decode -i > ${HOME}/gcloud-service-key.json
+  - cat ${HOME}/gcloud-service-key.json
   - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
   - gcloud components install kubectl
 
