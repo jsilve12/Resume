@@ -20,3 +20,4 @@ jobs:
     script:
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
       --project $GKE_project_id
+    - kubectl get pods -n resume
