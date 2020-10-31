@@ -23,4 +23,4 @@ jobs:
     - gcloud --quiet components install kubectl
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
       --project $GKE_project_id
-    - kubectl get pods -n resume
+    - kubectl set image deployment/website website=gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID -n resume
