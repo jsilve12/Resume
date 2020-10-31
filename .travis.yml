@@ -13,7 +13,8 @@ jobs:
   include:
   - stage: build-website
     script:
-    - "./docker"
+    - docker build . -t gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
+    - docker push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
   - stage: deploy-website
     script:
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone

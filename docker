@@ -1,3 +1,0 @@
-day=`date '+%Y%m%d%H%M%S'`
-docker build . -t gcr.io/personal-project-289714/resume:$day
-docker push gcr.io/personal-project-289714/resume:$day
