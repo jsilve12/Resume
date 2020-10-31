@@ -18,6 +18,7 @@ jobs:
     - gcloud docker -- push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
   - stage: deploy-website
     script:
+    - gcloud --quiet components install kubectl
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
       --project $GKE_project_id
     - kubectl get pods -n resume
