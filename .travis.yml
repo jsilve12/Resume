@@ -18,6 +18,8 @@ jobs:
     - gcloud docker -- push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
   - stage: deploy-website
     script:
+    - curl https://sdk.cloud.google.com | bash -s -- --disable-prompts > /dev/null
+    - export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
     - gcloud --quiet components install kubectl
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
       --project $GKE_project_id
