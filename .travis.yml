@@ -9,7 +9,8 @@ before_install:
   -in gcp-secret.json.enc -out gcp-secret.json -d
 - mv gcp-secret.json ${HOME}/gcloud-service-key.json
 - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-- gcloud auth configure-docker
+- gcloud components install docker-credentials-gcr
+- gcloud auth configure-docker --quiet
 - gcloud components update kubectl
 jobs:
   include:
