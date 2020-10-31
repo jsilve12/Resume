@@ -9,12 +9,18 @@ before_install:
   -in gcp-secret.json.enc -out gcp-secret.json -d
 - mv gcp-secret.json ${HOME}/gcloud-service-key.json
 - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+- gcloud auth configure-docker --quiet
 jobs:
   include:
   - stage: build-website
     script:
-    - "./docker"
+    - docker build . -t gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
+    - gcloud docker -- push gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID
   - stage: deploy-website
     script:
+    - curl https://sdk.cloud.google.com | bash -s -- --disable-prompts > /dev/null
+    - export PATH=${HOME}/google-cloud-sdk/bin:${PATH}
+    - gcloud --quiet components install kubectl
     - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone
       --project $GKE_project_id
+    - kubectl set image deployment/website website=gcr.io/personal-project-289714/resume:$TRAVIS_BUILD_ID -n resume
