@@ -2,10 +2,16 @@ sudo: required
 language: python
 services:
   - docker
+env:
+  global:
+    GKE_cluster_name=projects
+    GKE_zone=us-central1-c
+    GKE_project_id=personal-project-289714
 
 before_install:
   - echo $GCLOUD_SERVICE_KEY_STG | base64 --decode -i > ${HOME}/gcloud-service-key.json
   - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+  - gcloud components install kubectl
 
 jobs:
   include:
@@ -14,4 +20,4 @@ jobs:
         - ./docker
     - stage: deploy-website
       script:
-        - echo 'yay'
+        - gcloud container clusters get-credentials $GKE_cluster_name --zone $GKE_zone --project $GKE_project_id
