@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta12
+kind: Config
+build:
+  artifacts:
+    - image: gcr.io/personal-project-289714/resume
+      context: ./
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/boilerplate-resume.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: resume-website
+    port: 8000
+    localPort: 8000
