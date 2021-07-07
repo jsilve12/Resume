@@ -7,9 +7,9 @@ build:
 deploy:
   kubectl:
     manifests:
-      - kubernetes/boilerplate-resume.yaml
+      - kubernetes/local-deployment.yaml
 portForward:
   - resourceType: deployment
-    resourceName: resume-website
+    resourceName: website
     port: 8000
     localPort: 8000
