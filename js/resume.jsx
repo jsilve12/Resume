@@ -31,7 +31,7 @@ class Resume extends React.Component {
             <img src="static/img/Jonathan.jpg" alt="Picture of Me"/>
             <GridListTileBar
               title='Jonathan Silverstein'
-              subtitle='Full Stack Web Developmer and Machine Learning Engineer'
+              subtitle='Full Stack Web Developer and Machine Learning Engineer'
             />
           </GridListTile>
           <GridListTile cols={1} className='d-none d-md-inline'>
