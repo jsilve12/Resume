@@ -9,9 +9,9 @@ COPY package-lock.json /Resume/package-lock.json
 COPY webpack.config.js /Resume/webpack.config.js
 WORKDIR /Resume
 RUN apk add --no-cache nodejs npm
+RUN npm install
 
 COPY . /Resume/
-RUN npm install
 RUN ./node_modules/.bin/webpack
 WORKDIR /
 CMD uvicorn Resume.main:app --host 0.0.0.0
