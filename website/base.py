@@ -69,6 +69,11 @@ async def projects(request: Request):
                 'Title': 'University of Michigan Chess Website',
                 'Subtitle': 'http://umich.chess.jonathansilverstein.us',
                 'Body': 'Built and maintained the website for the chess club at the University of Michigan using FastAPI, React and Bootstrap, on top of a kubernetes cluster.'
+            },
+            {
+                'Title': 'Chess Endgame Trainer',
+                'Subtitle': 'http://endgame.chess.jonathansilverstein.us',
+                'Body': 'Built and maintained a website for training endgame play in chess.'
             }
         ]
     }
